@@ -24967,6 +24967,18 @@ async function run() {
         core.debug(new Date().toTimeString());
         // Set outputs for other workflow steps to use
         core.setOutput('time', new Date().toTimeString());
+        // Write an advanced job summary
+        core.summary.addHeading('Advanced Job Summary', 'h2');
+        core.summary.addTable([
+            [
+                { data: 'File', header: true },
+                { data: 'Result', header: true }
+            ],
+            ['foo.js', 'Pass '],
+            ['bar.js', 'Fail '],
+            ['test.js', 'Pass ']
+        ]);
+        core.summary.write();
     }
     catch (error) {
         // Fail the workflow run if an error occurs
